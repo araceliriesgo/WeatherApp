@@ -16,7 +16,7 @@ class CountryDetailViewController: BaseViewController {
     @IBOutlet var dailyCollectionView: UICollectionView!
     
     
-    var currentWeather  : FullWeather?
+    private var currentWeather  : FullWeather?
     
     init(weather: FullWeather) {
         super.init()
@@ -39,6 +39,9 @@ class CountryDetailViewController: BaseViewController {
         // Do any additional setup after loading the view.
     }
 
+    func getCurrentWeather() -> FullWeather? {
+        return currentWeather
+    }
     
     func configureViews(){
         self.nextDaysTitleLabel.configure(text: "Proximos días", textColor: CustomColors.buttonBlue, font: UIFont(customFont: .markProBold, size: 20))

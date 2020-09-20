@@ -55,7 +55,7 @@ extension CountryDetailViewController: UICollectionViewDataSource, UICollectionV
         case self.currentCollectionView:
             return 1
         case self.dailyCollectionView:
-            return self.currentWeather?.daily.count ?? 0
+            return self.getCurrentWeather()?.daily.count ?? 0
         default:
             return 0
         }
@@ -65,13 +65,13 @@ extension CountryDetailViewController: UICollectionViewDataSource, UICollectionV
         switch collectionView {
         case self.currentCollectionView:
             let descriptionCell = collectionView.dequeueReusableCell(withReuseIdentifier: CellNames.WeatherDescription.getName(), for: indexPath) as! CountryWeatherDescriptionCollectionViewCell
-            if let weather = self.currentWeather {
+            if let weather = self.getCurrentWeather() {
                 descriptionCell.configureCell(weather: weather)
             }
             return descriptionCell
         case self.dailyCollectionView:
             let weatherCell = collectionView.dequeueReusableCell(withReuseIdentifier: CellNames.WeatherIcons.getName(), for: indexPath) as! WeatherCollectionViewCell
-            if let weather = self.currentWeather?.daily[indexPath.row]{
+            if let weather = self.getCurrentWeather()?.daily[indexPath.row]{
                 weatherCell.configureCell(weather: weather, collectionViewFrame: self.dailyCollectionView.frame)
             }
             return weatherCell

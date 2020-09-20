@@ -15,7 +15,7 @@ class HomeViewController: BaseViewController {
     @IBOutlet var collectionView: UICollectionView!
     
     
-    var viewModel: HomeViewModel?
+    private var viewModel: HomeViewModel?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,6 +25,10 @@ class HomeViewController: BaseViewController {
         self.collectionViewSetup()
 
         
+    }
+    
+    func getViewModel() -> HomeViewModel? {
+        return self.viewModel
     }
     
     func bind() {
@@ -58,7 +62,7 @@ class HomeViewController: BaseViewController {
     func observerSetup(){
         
     self.viewModel?
-            .status
+            .getStatus()
             .subscribe(
                 onNext: { [weak self] status in
                     switch status {
@@ -73,7 +77,7 @@ class HomeViewController: BaseViewController {
     
         
        self.viewModel?
-        .forecast
+        .getForecast()
         .subscribe(
             onNext: { [weak self] fullWeather in
                 if !fullWeather.isEmpty {

@@ -13,9 +13,9 @@ import UIKit
 
 class BaseViewModel {
     
-    var disposeBag: DisposeBag
+    private var disposeBag: DisposeBag
     
-    var status: BehaviorRelay<RequestStatus> = .init(value: .Inactive)
+    private var status: BehaviorRelay<RequestStatus> = .init(value: .Inactive)
     
     
     
@@ -23,5 +23,15 @@ class BaseViewModel {
         self.disposeBag = disposeBag
     }
     
+    func getStatus() -> BehaviorRelay<RequestStatus> {
+        return status
+    }
     
+    func setStatus(value: RequestStatus) {
+        self.status.accept(value)
+    }
+    
+    func getDisposeBag() -> DisposeBag {
+        return self.disposeBag
+    }
 }

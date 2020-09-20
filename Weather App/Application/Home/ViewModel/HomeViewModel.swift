@@ -12,9 +12,9 @@ import RxCocoa
 
 class HomeViewModel: BaseViewModel {
     
-    var currentCoutries: [Country] = []
-    var forecast: BehaviorRelay<[FullWeather]> = .init(value: [])
-    var temporalForecast: [FullWeather] = []
+    private var currentCoutries: [Country] = []
+    private var forecast: BehaviorRelay<[FullWeather]> = .init(value: [])
+    private var temporalForecast: [FullWeather] = []
     
     
     override init(disposeBag: DisposeBag){
@@ -25,7 +25,7 @@ class HomeViewModel: BaseViewModel {
     }
     
     func getCountries(){
-        self.status.accept(.Loading)
+        self.setStatus(value: .Loading)
         Request
             .GetCountries()
             .rx_dispatch()
@@ -39,16 +39,17 @@ class HomeViewModel: BaseViewModel {
                         
             },
                 onError: { [weak self] error in
-                    self?.status.accept(.Finished)
+                    self?.setStatus(value: .Finished)
                     print(error.localizedDescription)
-            }).disposed(by: self.disposeBag)
+            }).disposed(by: self.getDisposeBag())
     }
+    
     
     func getFullWeather(for country: Country) {
            guard let countryLat = country.latitude, let countryLon = country.longitude else {
                return
            }
-           self.status.accept(.Loading)
+           self.setStatus(value: .Loading)
            Request
                .GetFullWeather(latitude: countryLat, longitude: countryLon)
                .rx_dispatch()
@@ -60,14 +61,18 @@ class HomeViewModel: BaseViewModel {
             
                     if country.name == self?.currentCoutries.last?.name {
                         self?.forecast.accept(self?.temporalForecast ?? [])
-                        self?.status.accept(.Finished)
+                        self?.setStatus(value: .Finished)
                     }
                     
                },
                    onError: { [weak self] error in
-                       self?.status.accept(.Finished)
-               }).disposed(by: disposeBag)
+                       self?.setStatus(value: .Finished)
+               }).disposed(by: self.getDisposeBag())
        }
+    
+    func getForecast() -> BehaviorRelay<[FullWeather]> {
+        return self.forecast
+    }
     
     
     

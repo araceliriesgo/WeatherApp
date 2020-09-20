@@ -29,14 +29,14 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
     
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.viewModel?.forecast.value.count ?? 0
+        return self.getViewModel()?.getForecast().value.count ?? 0
         
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 
         let currentCell = collectionView.dequeueReusableCell(withReuseIdentifier: CellNames.WeatherDetail.getName(), for: indexPath) as! WeatherDetailCollectionViewCell
-        if let weather = self.viewModel?.forecast.value[indexPath.row] {
+        if let weather = self.getViewModel()?.getForecast().value[indexPath.row] {
             currentCell.configureCell(weather: weather)
         }
         return currentCell
@@ -54,7 +54,7 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
     
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if let weather = self.viewModel?.forecast.value[indexPath.row]{
+        if let weather = self.getViewModel()?.getForecast().value[indexPath.row]{
             let vc = CountryDetailViewController(weather: weather)
             self.navigationController?.pushViewController(vc, animated: true)
         }
