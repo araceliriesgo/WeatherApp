@@ -1,4 +1,5 @@
 weatherApp
+
 Un pequeño ejemplo de lo que podria ser una app para muestreo del clima en diferentes regiones
 
 Es importante considerar :
