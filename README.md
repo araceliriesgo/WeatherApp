@@ -9,8 +9,8 @@ esto tomando en cuenta un posible crecimiento del dataSource o la incorporación
 nuevos elementos para mostrar al usuario…
 
 La mejor opción a la hora de mostrar los datos actuales seria con las coordenadas de 
-localización en las que se encuentre el usuario, sin embargo, tomando en cuenta que 
-la app se desarrollo desde un simulador y no desde un teléfono real, hubo esa limitante con 
+localización en las que se encuentre el usuario, sin embargo, tomando en cuenta que esta seria
+la primera version y que el demo se desarrollo desde un simulador y no desde un teléfono real, hubo esa limitante con 
 respecto a obtener la localización
 
 Para saber la localización de las regiones se uso una API del sitio web https://datahelpdesk.worldbank.org
