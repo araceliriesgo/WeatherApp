@@ -8,38 +8,6 @@
 
 import Foundation
 
-struct BasicData: Codable {
-    var page    : Int?
-    var pages   : Int?
-    var perPage : String?
-    var total   : Int?
-    
-    enum CodingKeys: String, CodingKey {
-        case page    = "page"
-        case pages   = "pages"
-        case perPage = "per_page"
-        case total   = "total"
-    }
-}
-
-class Countries: Codable {
-    var first: BasicData?
-    var second: [Country] = []
-    
-    init() {
-        
-    }
-    
-    required init(from decoder: Decoder) throws {
-        var container = try decoder.unkeyedContainer()
-        self.first = try container.decode(BasicData.self)
-        self.second = try container.decode([Country].self)
-    }
-}
-
-
-
-
 class Country: Codable {
     var id          : String?
     var isoCode     : String?
